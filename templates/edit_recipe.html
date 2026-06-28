@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="form-page">
+
+    <div class="form-container">
+
+        <div class="form-header">
+            <h1>
+                <i class="fas fa-pen-to-square"></i>
+                Edit Recipe
+            </h1>
+            <p>Update your delicious recipe details.</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Title</label>
+                {{ form.title }}
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                {{ form.category }}
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                {{ form.description }}
+            </div>
+
+            <div class="form-group">
+                <label>Ingredients</label>
+                {{ form.ingredients }}
+            </div>
+
+            <div class="form-group">
+                <label>Instructions</label>
+                {{ form.instructions }}
+            </div>
+
+            {% if recipe.image %}
+            <div class="current-image">
+
+                <p>Current Image</p>
+
+                <img
+                    src="{{ recipe.image.url }}"
+                    alt="{{ recipe.title }}"
+                >
+
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label>Change Image</label>
+                {{ form.image }}
+            </div>
+
+            <div class="form-buttons">
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-save"></i>
+                    Update Recipe
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

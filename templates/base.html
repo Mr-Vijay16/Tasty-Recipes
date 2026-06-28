@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Recipes</title>
+
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+</head>
+<body>
+
+<nav>
+
+
+<div class="logo">
+    <a href="{% url 'home' %}">
+        <h2>
+            <i class="fa-solid fa-utensils"></i>
+            Tasty<span>Recipes</span>
+        </h2>
+    </a>
+</div>
+
+<ul>
+
+    <li>
+        <a href="{% url 'home' %}"
+           class="{% if request.path == '/' %}active{% endif %}">
+            Home
+        </a>
+    </li>
+
+    {% if user.is_authenticated %}
+
+    <li>
+        <a href="{% url 'dashboard' %}"
+           class="{% if request.path == '/dashboard/' %}active{% endif %}">
+            Dashboard
+        </a>
+    </li>
+
+    <li>
+        <a href="{% url 'favorites' %}"
+           class="{% if request.path == '/favorites/' %}active{% endif %}">
+            Favorites
+        </a>
+    </li>
+
+    <li>
+        <a href="{% url 'profile' %}"
+           class="{% if request.path == '/profile/' %}active{% endif %}">
+            Profile
+        </a>
+    </li>
+
+    <li>
+        <a href="{% url 'logout' %}">
+            Logout
+        </a>
+    </li>
+
+    {% else %}
+
+    <li>
+        <a href="{% url 'login' %}"
+           class="{% if request.path == '/login/' %}active{% endif %}">
+            Login
+        </a>
+    </li>
+
+    <li>
+        <a href="{% url 'register' %}"
+           class="{% if request.path == '/register/' %}active{% endif %}">
+            Register
+        </a>
+    </li>
+
+    {% endif %}
+
+</ul>
+
+</nav>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>
