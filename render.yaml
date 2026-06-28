@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: tastyrecipes
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn tastyrecipes.wsgi:application"
