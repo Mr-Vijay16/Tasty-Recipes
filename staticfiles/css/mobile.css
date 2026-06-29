@@ -1,0 +1,136 @@
+@media(max-width:992px){
+
+    .recipe-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .recipe-detail{
+        grid-template-columns:1fr;
+    }
+
+    .recipe-image{
+        position:static;
+    }
+}
+
+@media(max-width:768px){
+
+    body{
+        padding-top:130px;
+    }
+
+    nav{
+        flex-direction:column;
+        gap:20px;
+        padding:20px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:20px;
+    }
+
+    .hero-content h1{
+        font-size:45px;
+    }
+
+    .hero-content p{
+        font-size:18px;
+    }
+
+    .search-box{
+        width:100%;
+    }
+
+    .search-box form{
+        flex-direction:column;
+    }
+
+    .search-box input,
+    .search-box select,
+    .search-box button{
+        width:100%;
+    }
+
+    .recipe-container{
+        grid-template-columns:1fr;
+    }
+
+    .stats-container{
+        grid-template-columns:1fr;
+    }
+
+    .card-buttons,
+    .dashboard-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .form-container{
+        padding:30px 20px;
+    }
+
+    .recipe-image img{
+        height:300px;
+        object-fit:cover;
+    }
+}
+@media(max-width:768px){
+
+    .recipe-detail{
+        grid-template-columns:1fr;
+    }
+
+    .recipe-image{
+        position:static;
+    }
+
+    .profile-stats{
+        grid-template-columns:1fr;
+    }
+
+    .form-buttons{
+        flex-direction:column;
+    }
+
+    .profile-card,
+    .form-container,
+    .auth-card,
+    .register-card{
+        padding:30px 20px;
+    }
+
+    .recipe-image img{
+        height:350px;
+        object-fit:cover;
+    }
+}
+@media (max-width:768px){
+
+    .stats-container{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-header h1{
+        font-size:2rem;
+    }
+
+    .section-title{
+        font-size:2rem;
+    }
+
+    .stat-card{
+        padding:30px;
+    }
+}
+@media(max-width:992px){
+
+    .dashboard-top{
+        flex-direction:column;
+    }
+
+    .stats-container{
+        width:100%;
+        grid-template-columns:1fr;
+    }
+}
