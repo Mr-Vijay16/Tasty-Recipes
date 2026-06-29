@@ -7,11 +7,13 @@
 
     <!-- Left Side -->
     <div class="recipe-image">
-
-        {% load static %}
-
-<img src="{% static 'images/Indian-Butter-Chicken-recipe-with-rice.jpg' %}">
-    </div>
+    {% if recipe.image %}
+        <img
+            src="{{ recipe.image.url }}"
+            alt="{{ recipe.title }}"
+        >
+    {% endif %}
+</div>
 
     <!-- Right Side -->
     <div class="recipe-info">
