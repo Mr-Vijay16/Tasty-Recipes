@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -8,52 +9,45 @@
 
     {% for favorite in favorites %}
 
-    <div class="recipe-card">
+   <div class="recipe-card">
 
-        {% if favorite.recipe.image %}
-        <img
-            src="{{ favorite.recipe.image.url }}"
-            alt="{{ favorite.recipe.title }}"
-        >
+
+    {% if favorite.recipe.image %}
+       {% load static %}
+
+<img
+    src="{% static 'images/' %}{{ favorite.recipe.image.name|cut:'recipes/' }}"
+    alt="{{ favorite.recipe.title }}"
+>
+    {% endif %}
+
+    <div class="recipe-content">
+
+        {% if favorite.recipe.category %}
+        <span class="category-badge">
+            {{ favorite.recipe.category.name }}
+        </span>
         {% endif %}
 
-        <div class="recipe-content">
+        <h2>{{ favorite.recipe.title }}</h2>
 
-            {% if favorite.recipe.category %}
-            <span class="category-badge">
-                {{ favorite.recipe.category.name }}
-            </span>
-            {% endif %}
+        <p>
+            {{ favorite.recipe.description|truncatewords:15 }}
+        </p>
 
-            <h2>
-                {{ favorite.recipe.title }}
-            </h2>
+        <div class="card-buttons">
+            <a href="{% url 'recipe_detail' favorite.recipe.id %}" class="btn">
+                👁 View Recipe
+            </a>
 
-            <p>
-                {{ favorite.recipe.description|truncatewords:15 }}
-            </p>
-
-            <div class="card-buttons">
-
-                <a
-                    href="{% url 'recipe_detail' favorite.recipe.id %}"
-                    class="btn"
-                >
-                    View Recipe
-                </a>
-
-                <a
-                    href="{% url 'remove_favorite' favorite.id %}"
-                    class="delete-btn"
-                >
-                    💔 Remove
-                </a>
-
-            </div>
-
+            <a href="{% url 'remove_favorite' favorite.id %}" class="delete-btn">
+                💔 Remove
+            </a>
         </div>
 
     </div>
+
+</div>
 
     {% empty %}
 

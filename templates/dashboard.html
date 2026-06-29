@@ -31,8 +31,6 @@
 
     </div>
 
-
-    <!-- My Recipes -->
     <h2 class="section-title">
         My Recipes
     </h2>
@@ -43,12 +41,10 @@
 
         <div class="recipe-card">
 
-            {% if recipe.image %}
             <img
-                src="{{ recipe.image.url }}"
+                src="{% static recipe.static_image %}"
                 alt="{{ recipe.title }}"
             >
-            {% endif %}
 
             <div class="recipe-content">
 
@@ -63,34 +59,32 @@
                 <p>
                     {{ recipe.description|truncatewords:20 }}
                 </p>
-                
 
                 <div class="dashboard-buttons">
 
-    <a href="{% url 'recipe_detail' recipe.id %}" class="view-btn">
-        <i class="fa-solid fa-eye"></i> View
-    </a>
+                    <a href="{% url 'recipe_detail' recipe.id %}" class="view-btn">
+                        <i class="fa-solid fa-eye"></i> View
+                    </a>
 
-    <a href="{% url 'edit_recipe' recipe.id %}" class="edit-btn">
-        <i class="fa-solid fa-pen-to-square"></i> Edit
-    </a>
-    
+                    <a href="{% url 'edit_recipe' recipe.id %}" class="edit-btn">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </a>
 
-    {% if recipe.id in favorite_ids %}
-        <a href="{% url 'favorite_recipe' recipe.id %}" class="favorite-btn">
-    💔 Unfavorite
-</a>
-    {% else %}
-        <a href="{% url 'favorite_recipe' recipe.id %}" class="favorite-btn">
-            ❤️ Favorite
-        </a>
-    {% endif %}
+                    {% if recipe.id in favorite_ids %}
+                        <a href="{% url 'remove_recipe_favorite' recipe.id %}" class="favorite-btn">
+                            💔 Unfavorite
+                        </a>
+                    {% else %}
+                        <a href="{% url 'favorite_recipe' recipe.id %}" class="favorite-btn">
+                            ❤️ Favorite
+                        </a>
+                    {% endif %}
 
-    <a href="{% url 'delete_recipe' recipe.id %}" class="delete-btn">
-        <i class="fa-solid fa-trash"></i> Delete
-    </a>
+                    <a href="{% url 'delete_recipe' recipe.id %}" class="delete-btn">
+                        <i class="fa-solid fa-trash"></i> Delete
+                    </a>
 
-</div>
+                </div>
 
             </div>
 

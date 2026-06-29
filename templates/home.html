@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -25,41 +26,43 @@
     </div>
 
 </div>
+
 <div class="search-wrapper">
-  
-<div class="search-box">
 
-    <form method="GET" action="{% url 'home' %}">
+    <div class="search-box">
 
-        <input
-            type="text"
-            name="search"
-            placeholder="Search recipes..."
-            value="{{ request.GET.search }}"
-        >
+        <form method="GET" action="{% url 'home' %}">
 
-        <select name="category">
-            <option value="">All Categories</option>
-
-            {% for category in categories %}
-            <option
-                value="{{ category.id }}"
-                {% if request.GET.category == category.id|stringformat:"s" %}
-                selected
-                {% endif %}
+            <input
+                type="text"
+                name="search"
+                placeholder="Search recipes..."
+                value="{{ request.GET.search }}"
             >
-                {{ category.name }}
-            </option>
-            {% endfor %}
-        </select>
 
-        <button type="submit">
-            Search
-        </button>
+            <select name="category">
+                <option value="">All Categories</option>
 
-    </form>
+                {% for category in categories %}
+                <option
+                    value="{{ category.id }}"
+                    {% if request.GET.category == category.id|stringformat:"s" %}
+                    selected
+                    {% endif %}
+                >
+                    {{ category.name }}
+                </option>
+                {% endfor %}
+            </select>
 
-</div>
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
 </div>
 
 <div class="recipe-container">
@@ -68,12 +71,10 @@
 
     <div class="recipe-card">
 
-        {% if recipe.image %}
         <img
-            src="{{ recipe.image.url }}"
+            src="{% static recipe.static_image %}"
             alt="{{ recipe.title }}"
         >
-        {% endif %}
 
         <div class="recipe-content">
 
@@ -100,27 +101,27 @@
 
                 {% if user.is_authenticated %}
 
-    {% if recipe.id in favorites %}
+                    {% if recipe.id in favorites %}
 
-        <a
-            href="{% url 'remove_recipe_favorite' recipe.id %}"
-            class="btn delete-btn"
-        >
-            💔 Unfavorite
-        </a>
+                        <a
+                            href="{% url 'remove_recipe_favorite' recipe.id %}"
+                            class="btn delete-btn"
+                        >
+                            💔 Unfavorite
+                        </a>
 
-    {% else %}
+                    {% else %}
 
-        <a
-            href="{% url 'favorite_recipe' recipe.id %}"
-            class="btn favorite-btn"
-        >
-            ❤️ Favorite
-        </a>
+                        <a
+                            href="{% url 'favorite_recipe' recipe.id %}"
+                            class="btn favorite-btn"
+                        >
+                            ❤️ Favorite
+                        </a>
 
-    {% endif %}
+                    {% endif %}
 
-{% endif %}
+                {% endif %}
 
             </div>
 

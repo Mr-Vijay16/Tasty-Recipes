@@ -52,25 +52,26 @@ def home(request):
         context
     )
 
-def recipe_detail(request, id):
+def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(
         Recipe,
-        id=id
+        id=recipe_id
     )
 
     comments = Comment.objects.filter(
         recipe=recipe
     ).order_by('-created_at')
 
+    context = {
+        'recipe': recipe,
+        'comments': comments,
+    }
+
     return render(
         request,
         'recipe_detail.html',
-        {
-            'recipe': recipe,
-            'comments': comments
-        }
+        context
     )
-
 def register(request):
     form = UserCreationForm()
 
@@ -227,6 +228,13 @@ def home(request):
             flat=True
         )
 
+    for recipe in recipes:
+        if recipe.image:
+            recipe.static_image = recipe.image.name.replace(
+                'recipes/',
+                'images/'
+            )
+
     context = {
         'recipes': recipes,
         'categories': categories,
@@ -289,16 +297,29 @@ def logout_user(request):
 def dashboard(request):
     recipes = Recipe.objects.filter(user=request.user)
 
+    # Create static image path
+    for recipe in recipes:
+        if recipe.image:
+            recipe.static_image = recipe.image.name.replace(
+                'recipes/',
+                'images/'
+            )
+
+    total_recipes = recipes.count()
+
     favorite_ids = Favorite.objects.filter(
         user=request.user
-    ).values_list('recipe_id', flat=True)
+    ).values_list(
+        'recipe_id',
+        flat=True
+    )
+
+    total_favorites = len(favorite_ids)
 
     context = {
         'recipes': recipes,
-        'total_recipes': recipes.count(),
-        'total_favorites': Favorite.objects.filter(
-            user=request.user
-        ).count(),
+        'total_recipes': total_recipes,
+        'total_favorites': total_favorites,
         'favorite_ids': favorite_ids,
     }
 
@@ -364,16 +385,6 @@ def delete_recipe(request, id):
 
     return redirect('dashboard')
 
-@login_required
-def favorite_recipe(request, id):
-    recipe = get_object_or_404(Recipe, id=id)
-
-    Favorite.objects.get_or_create(
-        user=request.user,
-        recipe=recipe
-    )
-
-    return redirect('home')
 
 @login_required
 def favorite_recipe(request, id):
@@ -405,8 +416,12 @@ def favorites(request):
     )
 
 @login_required
+@login_required
 def favorite_list(request):
-    favorites = Favorite.objects.filter(
+    favorites = Favorite.objects.select_related(
+        'recipe',
+        'recipe__category'
+    ).filter(
         user=request.user
     )
 
@@ -417,7 +432,6 @@ def favorite_list(request):
             'favorites': favorites
         }
     )
-    
 @login_required
 def remove_favorite(request, id):
     favorite = get_object_or_404(
