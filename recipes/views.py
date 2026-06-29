@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import RecipeForm
-
+from django.db.models import Avg
 
 
 
@@ -38,12 +38,23 @@ def home(request):
 
     if category:
         recipes = recipes.filter(
-            category__id=category
+            category_id=category
+        )
+
+    favorites = []
+
+    if request.user.is_authenticated:
+        favorites = Favorite.objects.filter(
+            user=request.user
+        ).values_list(
+            'recipe_id',
+            flat=True
         )
 
     context = {
         'recipes': recipes,
         'categories': categories,
+        'favorites': favorites,
     }
 
     return render(
@@ -72,6 +83,7 @@ def recipe_detail(request, recipe_id):
         'recipe_detail.html',
         context
     )
+   
 def register(request):
     form = UserCreationForm()
 
@@ -118,16 +130,25 @@ def dashboard(request):
         user=request.user
     )
 
-    total_recipes = recipes.count()
-
-    total_favorites = Favorite.objects.filter(
+    favorites_count = Favorite.objects.filter(
         user=request.user
     ).count()
 
+    recipes_count = recipes.count()
+
+    # Convert media path to static path
+    for recipe in recipes:
+        if recipe.image:
+            recipe.static_image = recipe.image.name.replace(
+                'recipes/',
+                'images/'
+            )
+            print(recipe.title, recipe.static_image)
+
     context = {
         'recipes': recipes,
-        'total_recipes': total_recipes,
-        'total_favorites': total_favorites,
+        'recipes_count': recipes_count,
+        'favorites_count': favorites_count,
     }
 
     return render(
@@ -246,13 +267,32 @@ def home(request):
         'home.html',
         context
     )
-def recipe_detail(request, id):
-    recipe = Recipe.objects.get(id=id)
+def recipe_detail(request, recipe_id):
+    recipe = get_object_or_404(
+        Recipe,
+        id=recipe_id
+    )
+
+    comments = Comment.objects.filter(
+        recipe=recipe
+    ).order_by('-created_at')
+
+    average_rating = Rating.objects.filter(
+        recipe=recipe
+    ).aggregate(
+        Avg('stars')
+    )['stars__avg']
+
+    context = {
+        'recipe': recipe,
+        'comments': comments,
+        'average_rating': average_rating,
+    }
 
     return render(
         request,
         'recipe_detail.html',
-        {'recipe': recipe}
+        context
     )
 
 def register(request):
@@ -295,32 +335,18 @@ def logout_user(request):
 
 @login_required
 def dashboard(request):
-    recipes = Recipe.objects.filter(user=request.user)
-
-    # Create static image path
-    for recipe in recipes:
-        if recipe.image:
-            recipe.static_image = recipe.image.name.replace(
-                'recipes/',
-                'images/'
-            )
-
-    total_recipes = recipes.count()
-
-    favorite_ids = Favorite.objects.filter(
+    recipes = Recipe.objects.filter(
         user=request.user
-    ).values_list(
-        'recipe_id',
-        flat=True
     )
 
-    total_favorites = len(favorite_ids)
+    favorites_count = Favorite.objects.filter(
+        user=request.user
+    ).count()
 
     context = {
         'recipes': recipes,
-        'total_recipes': total_recipes,
-        'total_favorites': total_favorites,
-        'favorite_ids': favorite_ids,
+        'recipes_count': recipes.count(),
+        'favorites_count': favorites_count,
     }
 
     return render(
@@ -403,6 +429,9 @@ def favorite_recipe(request, id):
 def favorites(request):
     favorites = Favorite.objects.filter(
         user=request.user
+    ).select_related(
+        'recipe',
+        'recipe__category'
     )
 
     context = {
@@ -415,7 +444,6 @@ def favorites(request):
         context
     )
 
-@login_required
 @login_required
 def favorite_list(request):
     favorites = Favorite.objects.select_related(
@@ -445,46 +473,48 @@ def remove_favorite(request, id):
     return redirect('favorites')
 
 @login_required
-def rate_recipe(request, id):
+def rate_recipe(request, recipe_id):
     recipe = get_object_or_404(
         Recipe,
-        id=id
+        id=recipe_id
     )
 
-    stars = request.POST.get('stars')
+    if request.method == 'POST':
+        stars = request.POST.get('stars')
 
-    Rating.objects.update_or_create(
-        user=request.user,
-        recipe=recipe,
-        defaults={
-            'stars': stars
-        }
-    )
+        Rating.objects.update_or_create(
+            recipe=recipe,
+            user=request.user,
+            defaults={
+                'stars': stars
+            }
+        )
 
     return redirect(
         'recipe_detail',
-        id=id
+        recipe_id=recipe.id
     )
     
 @login_required
-def add_comment(request, id):
+def add_comment(request, recipe_id):
     recipe = get_object_or_404(
         Recipe,
-        id=id
+        id=recipe_id
     )
 
     if request.method == 'POST':
         text = request.POST.get('comment')
 
-        Comment.objects.create(
-            user=request.user,
-            recipe=recipe,
-            text=text
-        )
+        if text:
+            Comment.objects.create(
+                recipe=recipe,
+                user=request.user,
+                text=text
+            )
 
     return redirect(
         'recipe_detail',
-        id=id
+        recipe_id=recipe.id
     )
     
 @login_required

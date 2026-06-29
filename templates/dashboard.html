@@ -5,32 +5,64 @@
 
 <div class="dashboard">
 
+    <!-- Header -->
     <div class="dashboard-header">
-        <h1>👋 Welcome, {{ user.username }}</h1>
-        <p>Manage your recipes and favorites here.</p>
 
-        <a href="{% url 'add_recipe' %}" class="add-btn">
+        <div>
+            <h1>👋 Welcome, {{ user.username }}</h1>
+            <p>
+                Manage your recipes and favorites here.
+            </p>
+        </div>
+
+        <a
+            href="{% url 'add_recipe' %}"
+            class="add-btn"
+        >
             <i class="fa-solid fa-plus"></i>
             Add Recipe
         </a>
+
     </div>
 
+    <!-- Stats -->
     <div class="stats-container">
 
         <div class="stat-card">
-            <i class="fa-solid fa-utensils"></i>
-            <h2>{{ total_recipes }}</h2>
-            <p>Total Recipes</p>
+
+            <div class="stat-icon recipes-icon">
+                <i class="fa-solid fa-utensils"></i>
+            </div>
+
+            <h2>
+                {{ recipes_count }}
+            </h2>
+
+            <p>
+                Total Recipes
+            </p>
+
         </div>
 
         <div class="stat-card">
-            <i class="fa-solid fa-heart"></i>
-            <h2>{{ total_favorites }}</h2>
-            <p>Favorites</p>
+
+            <div class="stat-icon favorites-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+
+            <h2>
+                {{ favorites_count }}
+            </h2>
+
+            <p>
+                Favorites
+            </p>
+
         </div>
 
     </div>
 
+    <!-- My Recipes -->
     <h2 class="section-title">
         My Recipes
     </h2>
@@ -41,10 +73,17 @@
 
         <div class="recipe-card">
 
+            {% if recipe.image %}
             <img
-                src="{% static recipe.static_image %}"
+                src="{{ recipe.image.url }}"
                 alt="{{ recipe.title }}"
             >
+            {% else %}
+            <img
+                src="{% static 'images/default_recipe.jpg' %}"
+                alt="No Image"
+            >
+            {% endif %}
 
             <div class="recipe-content">
 
@@ -54,34 +93,35 @@
                 </span>
                 {% endif %}
 
-                <h2>{{ recipe.title }}</h2>
+                <h2>
+                    {{ recipe.title }}
+                </h2>
 
                 <p>
-                    {{ recipe.description|truncatewords:20 }}
+                    {{ recipe.description|truncatewords:15 }}
                 </p>
 
-                <div class="dashboard-buttons">
+                <div class="card-buttons">
 
-                    <a href="{% url 'recipe_detail' recipe.id %}" class="view-btn">
-                        <i class="fa-solid fa-eye"></i> View
+                    <a
+                        href="{% url 'recipe_detail' recipe.id %}"
+                        class="btn"
+                    >
+                        👁 View
                     </a>
 
-                    <a href="{% url 'edit_recipe' recipe.id %}" class="edit-btn">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    <a
+                        href="{% url 'edit_recipe' recipe.id %}"
+                        class="edit-btn"
+                    >
+                        ✏ Edit
                     </a>
 
-                    {% if recipe.id in favorite_ids %}
-                        <a href="{% url 'remove_recipe_favorite' recipe.id %}" class="favorite-btn">
-                            💔 Unfavorite
-                        </a>
-                    {% else %}
-                        <a href="{% url 'favorite_recipe' recipe.id %}" class="favorite-btn">
-                            ❤️ Favorite
-                        </a>
-                    {% endif %}
-
-                    <a href="{% url 'delete_recipe' recipe.id %}" class="delete-btn">
-                        <i class="fa-solid fa-trash"></i> Delete
+                    <a
+                        href="{% url 'delete_recipe' recipe.id %}"
+                        class="delete-btn"
+                    >
+                        🗑 Delete
                     </a>
 
                 </div>
@@ -92,16 +132,23 @@
 
         {% empty %}
 
-        <div class="empty-card">
-            <h3>No Recipes Added Yet 🍲</h3>
-            <p>Start by adding your first delicious recipe.</p>
+        <div class="empty-state">
+
+            <h2>
+                No recipes added yet 🍽️
+            </h2>
+
+            <p>
+                Start by creating your first recipe.
+            </p>
 
             <a
                 href="{% url 'add_recipe' %}"
-                class="add-btn"
+                class="btn"
             >
                 Add Recipe
             </a>
+
         </div>
 
         {% endfor %}
@@ -110,4 +157,4 @@
 
 </div>
 
-{% endblock %}
+{% endblock %}  

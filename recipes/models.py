@@ -59,40 +59,29 @@ def __str__(self):
     return f'{self.user.username} - {self.recipe.title}'
 
 class Rating(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
-    )
-
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE
     )
-
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
     stars = models.IntegerField()
 
     class Meta:
-        unique_together = ('user', 'recipe')
-
-    def __str__(self):
-        return f'{self.recipe.title} - {self.stars} stars'
+        unique_together = ('recipe', 'user')
     
 class Comment(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
-    )
-
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE
     )
-
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
     text = models.TextField()
-
     created_at = models.DateTimeField(
         auto_now_add=True
     )
-
-    def __str__(self):
-        return self.user.username

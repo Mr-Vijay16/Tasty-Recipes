@@ -4,9 +4,11 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
 
-    path('recipe/<int:id>/',
-         views.recipe_detail,
-         name='recipe_detail'),
+  path(
+    'recipe/<int:recipe_id>/',
+    views.recipe_detail,
+    name='recipe_detail'
+),
 
     path('register/',
          views.register,
@@ -58,14 +60,15 @@ path(
     name='remove_favorite'
 ),
 path(
-    'rate/<int:id>/',
-    views.rate_recipe,
-    name='rate_recipe'
-),
-path(
-    'comment/<int:id>/',
+    'recipe/<int:recipe_id>/comment/',
     views.add_comment,
     name='add_comment'
+),
+
+path(
+    'recipe/<int:recipe_id>/rate/',
+    views.rate_recipe,
+    name='rate_recipe'
 ),
 path(
     'profile/',

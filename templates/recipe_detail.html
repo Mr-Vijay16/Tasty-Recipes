@@ -5,78 +5,82 @@
 
 <div class="recipe-detail">
 
-    <!-- Left Side -->
-    <div class="recipe-image">
+
+<!-- Left Side -->
+<div class="recipe-image">
     {% if recipe.image %}
         <img
             src="{{ recipe.image.url }}"
             alt="{{ recipe.title }}"
         >
+    {% else %}
+        <img
+            src="{% static 'images/default_recipe.jpg' %}"
+            alt="No Image Available"
+        >
     {% endif %}
 </div>
 
-    <!-- Right Side -->
-    <div class="recipe-info">
+<!-- Right Side -->
+<div class="recipe-info">
 
-        {% if recipe.category %}
-            <span class="category">
-                {{ recipe.category.name }}
-            </span>
+    {% if recipe.category %}
+        <span class="category">
+            {{ recipe.category.name }}
+        </span>
+    {% endif %}
+
+    <h1>{{ recipe.title }}</h1>
+
+    <p class="rating">
+        ⭐ Average Rating:
+        {% if average_rating %}
+            {{ average_rating|floatformat:1 }}/5
+        {% else %}
+            No ratings yet
         {% endif %}
+    </p>
 
-        <h1>{{ recipe.title }}</h1>
+    <!-- Description -->
+    <div class="detail-card">
+        <h3>Description</h3>
 
-        <p class="rating">
-            ⭐ Average Rating:
-            {% if recipe.average_rating %}
-                {{ recipe.average_rating }}/5
-            {% else %}
-                No ratings yet
-            {% endif %}
+        <p>
+            {{ recipe.description|default:"No description available." }}
         </p>
+    </div>
 
-        <!-- Description -->
-        <div class="detail-card">
-            <h3>Description</h3>
+    <!-- Ingredients -->
+    <div class="detail-card">
+        <h3>Ingredients</h3>
 
-            <p>
-                {{ recipe.description|default:"No description available." }}
-            </p>
+        <div class="ingredients">
+            {{ recipe.ingredients|linebreaks }}
         </div>
+    </div>
 
-        <!-- Ingredients -->
-        <div class="detail-card">
-            <h3>Ingredients</h3>
+    <!-- Instructions -->
+    <div class="detail-card">
+        <h3>Instructions</h3>
 
-            <div class="ingredients">
-                {{ recipe.ingredients|linebreaks }}
-            </div>
+        <div class="instructions">
+            {{ recipe.instructions|linebreaks }}
         </div>
+    </div>
 
-        <!-- Instructions -->
-        <div class="detail-card">
-            <h3>Instructions</h3>
+    <!-- Rating Form -->
+    <div class="detail-card">
 
-            <div class="instructions">
-                {{ recipe.instructions|linebreaks }}
-            </div>
-        </div>
+        <h3>⭐ Rate this Recipe</h3>
 
-        <!-- Rating -->
-        <div class="detail-card">
-
-            <h3>⭐ Rate this Recipe</h3>
-
-            {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
             <form
                 method="POST"
                 action="{% url 'rate_recipe' recipe.id %}"
-                class="rating-form"
             >
                 {% csrf_token %}
 
-                <select name="stars" required>
-                    <option value="">Select Rating</option>
+                <select name="stars">
                     <option value="1">⭐</option>
                     <option value="2">⭐⭐</option>
                     <option value="3">⭐⭐⭐</option>
@@ -90,25 +94,22 @@
                 >
                     Submit Rating
                 </button>
-
             </form>
+        {% else %}
+            <p>Please login to rate this recipe.</p>
+        {% endif %}
 
-            {% else %}
-                <p>Please login to rate this recipe.</p>
-            {% endif %}
+    </div>
 
-        </div>
+    <!-- Comments -->
+    <div class="detail-card">
 
-        <!-- Comments -->
-        <div class="detail-card">
+        <h3>💬 Comments</h3>
 
-            <h3>💬 Comments</h3>
-
-            {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
             <form
                 method="POST"
                 action="{% url 'add_comment' recipe.id %}"
-                class="comment-form"
             >
                 {% csrf_token %}
 
@@ -116,7 +117,6 @@
                     name="comment"
                     rows="4"
                     placeholder="Write your comment..."
-                    required
                 ></textarea>
 
                 <button
@@ -125,16 +125,14 @@
                 >
                     Post Comment
                 </button>
-
             </form>
+        {% else %}
+            <p>Please login to add comments.</p>
+        {% endif %}
 
-            {% else %}
-                <p>Please login to add comments.</p>
-            {% endif %}
+        <div class="comments">
 
-            <div class="comments">
-
-                {% for comment in comments %}
+            {% for comment in comments %}
 
                 <div class="comment-box">
 
@@ -156,24 +154,25 @@
 
                 </div>
 
-                {% empty %}
+            {% empty %}
 
-                    <p>No comments yet.</p>
+                <p>No comments yet.</p>
 
-                {% endfor %}
-
-            </div>
+            {% endfor %}
 
         </div>
 
-        <a
-            href="{% url 'home' %}"
-            class="btn"
-        >
-            ← Back to Recipes
-        </a>
-
     </div>
+
+    <a
+        href="{% url 'home' %}"
+        class="btn"
+    >
+        ← Back to Recipes
+    </a>
+
+</div>
+
 
 </div>
 
