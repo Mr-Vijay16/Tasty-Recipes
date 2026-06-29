@@ -78,4 +78,5 @@ path(
     name='remove_recipe_favorite'
 ),
 
+
 ]
