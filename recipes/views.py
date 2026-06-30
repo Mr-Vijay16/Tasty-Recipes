@@ -464,13 +464,18 @@ def favorite_list(request):
 def remove_favorite(request, id):
     favorite = get_object_or_404(
         Favorite,
-        id=id,
-        user=request.user
+        user=request.user,
+        recipe_id=id
     )
 
     favorite.delete()
 
-    return redirect('favorites')
+    return redirect(
+        request.META.get(
+            'HTTP_REFERER',
+            'home'
+        )
+    )
 
 @login_required
 def rate_recipe(request, recipe_id):
