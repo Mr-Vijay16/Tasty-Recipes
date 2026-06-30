@@ -85,11 +85,32 @@
 
         <div class="recipe-content">
 
-            {% if recipe.category %}
-            <span class="category-badge">
-                {{ recipe.category.name }}
-            </span>
-            {% endif %}
+          
+      <div class="recipe-header">
+
+    <div class="recipe-user">
+        <div class="profile-avatar">
+            {{ recipe.user.username|first|upper }}
+        </div>
+
+        <div class="user-details">
+            <div class="username">
+                {{ recipe.user.username }}
+            </div>
+
+            <div class="user-role">
+                Recipe Creator
+            </div>
+        </div>
+    </div>
+
+    {% if recipe.category %}
+    <span class="category-badge">
+        {{ recipe.category.name }}
+    </span>
+    {% endif %}
+
+</div>
 
             <h2>{{ recipe.title }}</h2>
 
