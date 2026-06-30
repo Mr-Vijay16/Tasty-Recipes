@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import cloudinary
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -79,9 +78,9 @@ TEMPLATES = [
 ]
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'your-cloud-name',
-    'API_KEY': 'your-api-key',
-    'API_SECRET': 'your-api-secret',
+    'CLOUD_NAME': 'rfymi401',
+    'API_KEY': '131219882459687',
+    'API_SECRET': 'zea7585YU8vy4Sp94-E_TwaSCm0',
 }
 
 WSGI_APPLICATION = 'tastyrecipes.wsgi.application'
@@ -150,5 +149,12 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
