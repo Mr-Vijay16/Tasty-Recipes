@@ -67,11 +67,11 @@
         My Recipes
     </h2>
 
-    <div class="recipe-container">
+    <div class="dashboard-recipes">
 
         {% for recipe in recipes %}
 
-        <div class="recipe-card">
+        <div class="dashboard-card">
 
             {% if recipe.image %}
             <img
@@ -85,7 +85,7 @@
             >
             {% endif %}
 
-            <div class="recipe-content">
+            <div class="dashboard-content">
 
                 {% if recipe.category %}
                 <span class="category-badge">
@@ -107,21 +107,21 @@
                         href="{% url 'recipe_detail' recipe.id %}"
                         class="btn"
                     >
-                        👁 View
+                         View
                     </a>
 
                     <a
                         href="{% url 'edit_recipe' recipe.id %}"
                         class="edit-btn"
                     >
-                        ✏ Edit
+                         Edit
                     </a>
 
                     <a
                         href="{% url 'delete_recipe' recipe.id %}"
                         class="delete-btn"
                     >
-                        🗑 Delete
+                         Delete
                     </a>
 
                 </div>
@@ -155,6 +155,39 @@
 
     </div>
 
+    <!-- Pagination -->
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">
+            &laquo;
+        </a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+
+            {% if page_obj.number == num %}
+            <a class="active-page">
+                {{ num }}
+            </a>
+            {% else %}
+            <a href="?page={{ num }}">
+                {{ num }}
+            </a>
+            {% endif %}
+
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">
+            &raquo;
+        </a>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
 </div>
 
-{% endblock %}  
+{% endblock %}

@@ -24,6 +24,8 @@ from .forms import RecipeForm, RegisterForm
 
 from .models import Recipe, Category, Favorite, Rating, Comment
 
+from django.core.paginator import Paginator
+
 def home(request):
     recipes = Recipe.objects.all()
     categories = Category.objects.all()
@@ -125,30 +127,29 @@ def logout_user(request):
     return redirect('home')
 
 @login_required
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
+
+@login_required
 def dashboard(request):
-    recipes = Recipe.objects.filter(
+    recipes_list = Recipe.objects.filter(
         user=request.user
-    )
+    ).order_by('-created_at')
+
+    paginator = Paginator(recipes_list, 6)  # 6 recipes per page
+
+    page_number = request.GET.get('page')
+    recipes = paginator.get_page(page_number)
 
     favorites_count = Favorite.objects.filter(
         user=request.user
     ).count()
 
-    recipes_count = recipes.count()
-
-    # Convert media path to static path
-    for recipe in recipes:
-        if recipe.image:
-            recipe.static_image = recipe.image.name.replace(
-                'recipes/',
-                'images/'
-            )
-            print(recipe.title, recipe.static_image)
-
     context = {
         'recipes': recipes,
-        'recipes_count': recipes_count,
         'favorites_count': favorites_count,
+        'total_recipes': recipes_list.count(),
+        'page_obj': recipes,
     }
 
     return render(
@@ -223,50 +224,36 @@ def delete_recipe(request, id):
 
 
 def home(request):
-    recipes = Recipe.objects.all()
-    categories = Category.objects.all()
+    recipes = Recipe.objects.all().order_by('-created_at')
 
     search = request.GET.get('search')
     category = request.GET.get('category')
 
     if search:
-        recipes = recipes.filter(
-            title__icontains=search
-        )
+        recipes = recipes.filter(title__icontains=search)
 
     if category:
-        recipes = recipes.filter(
-            category_id=category
-        )
+        recipes = recipes.filter(category_id=category)
+
+    paginator = Paginator(recipes, 6)  # 6 recipes per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     favorites = []
 
     if request.user.is_authenticated:
         favorites = Favorite.objects.filter(
             user=request.user
-        ).values_list(
-            'recipe_id',
-            flat=True
-        )
-
-    for recipe in recipes:
-        if recipe.image:
-            recipe.static_image = recipe.image.name.replace(
-                'recipes/',
-                'images/'
-            )
+        ).values_list('recipe_id', flat=True)
 
     context = {
-        'recipes': recipes,
-        'categories': categories,
+        'recipes': page_obj,
+        'page_obj': page_obj,
+        'categories': Category.objects.all(),
         'favorites': favorites,
     }
 
-    return render(
-        request,
-        'home.html',
-        context
-    )
+    return render(request, 'home.html', context)
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(
         Recipe,

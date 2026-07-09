@@ -1,44 +1,75 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-<div class="profile-container">
+<div class="profile-page">
 
-    <div class="profile-card">
+    <div class="profile-header">
 
         <div class="profile-avatar">
-            <i class="fa-solid fa-user"></i>
+            {{ user.username|first|upper }}
         </div>
 
-        <h1>
-            {{ request.user.username }}
-        </h1>
+        <div class="profile-info">
+            <h1>{{ user.username }}</h1>
 
-        <p>
-            {{ request.user.email }}
-        </p>
+            <p>{{ user.email }}</p>
 
-        <div class="profile-stats">
+            <span class="creator-badge">
+                🍽️ Recipe Creator
+            </span>
 
-            <div class="stat-box">
-                <h2>{{ total_recipes }}</h2>
-                <span>Recipes</span>
-            </div>
+            <p>
+                <i class="fa-solid fa-clock"></i>
+                Last Login:
+                {{ user.last_login|date:"d M Y, h:i A" }}
+            </p>
 
-            <div class="stat-box">
-                <h2>{{ total_favorites }}</h2>
-                <span>Favorites</span>
-            </div>
-
-            <div class="stat-box">
-                <h2>{{ total_comments }}</h2>
-                <span>Comments</span>
-            </div>
-
+            <p>
+                <i class="fa-solid fa-calendar"></i>
+                Member since
+                {{ user.date_joined|date:"F Y" }}
+            </p>
         </div>
 
     </div>
 
-</div>
+    <div class="profile-stats">
+
+        <div class="stat-box">
+            <h2>{{ total_recipes }}</h2>
+            <span>Recipes</span>
+        </div>
+
+        <div class="stat-box">
+            <h2>{{ total_favorites }}</h2>
+            <span>Favorites</span>
+        </div>
+
+        <div class="stat-box">
+            <h2>{{ total_comments }}</h2>
+            <span>Comments</span>
+        </div>
+
+    </div>
+
+    <div class="profile-actions">
+
+        <a href="{% url 'add_recipe' %}" class="btn">
+            Add Recipe
+        </a>
+
+        <a href="{% url 'dashboard' %}" class="btn-outline">
+            Dashboard
+        </a>
+
+        <a href="{% url 'edit_profile' %}" class="btn-outline">
+            Edit Profile
+        </a>
+
+    </div>
+
+</div>  
 
 {% endblock %}

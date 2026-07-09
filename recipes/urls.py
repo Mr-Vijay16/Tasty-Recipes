@@ -33,6 +33,8 @@ urlpatterns = [
     path('edit/<int:id>/',
          views.edit_recipe,
          name='edit_recipe'),
+    
+     path('edit-profile/', views.edit_profile, name='edit_profile'),
 
     path('delete/<int:id>/',
          views.delete_recipe,

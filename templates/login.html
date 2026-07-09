@@ -3,51 +3,37 @@
 {% block content %}
 
 <div class="auth-container">
-
     <div class="auth-card">
 
         <h1>Welcome Back 👋</h1>
         <p>Login to continue exploring delicious recipes.</p>
 
         <form method="POST">
-
             {% csrf_token %}
 
             <div class="input-group">
                 <label>Username</label>
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Enter your username"
-                    required
-                >
+                <input type="text" name="username"
+                       placeholder="Enter your username">
             </div>
 
             <div class="input-group">
                 <label>Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                >
+                <input type="password" name="password"
+                       placeholder="Enter your password">
             </div>
 
             <button type="submit" class="auth-btn">
                 Login
             </button>
-
         </form>
 
-        <p class="bottom-text">
+        <div class="bottom-text">
             Don't have an account?
-            <a href="{% url 'register' %}">
-                Register
-            </a>
-        </p>
+            <a href="{% url 'register' %}">Register</a>
+        </div>
 
     </div>
-
 </div>
 
 {% endblock %}
