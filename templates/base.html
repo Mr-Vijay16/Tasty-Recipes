@@ -23,6 +23,9 @@
             <i class="fa-solid fa-utensils"></i>
             Tasty<span>Recipes</span>
         </a>
+        <button class="menu-toggle" id="menu-toggle">
+    <i class="fa-solid fa-bars"></i>
+</button>
 
         <!-- Navigation -->
         <ul class="nav-menu">
@@ -133,6 +136,13 @@ toggleBtn.addEventListener('click', () => {
         toggleBtn.innerHTML =
             '<i class="fa-solid fa-moon"></i>';
     }
+});
+
+const menuBtn = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-menu");
+
+menuBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
 });
 
 </script>
