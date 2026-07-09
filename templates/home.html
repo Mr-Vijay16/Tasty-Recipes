@@ -3,12 +3,12 @@
 
 {% block content %}
 
-<section class="hero-section">
+<section class="hero">
 
     <div class="hero-left">
 
         <span class="hero-tag">
-            🍽 Featured Recipes
+            🍽 Featured Recipe
         </span>
 
         <h1>
@@ -17,15 +17,14 @@
         </h1>
 
         <p>
-            Explore thousands of delicious recipes created by our community.
-            Save your favourites and cook like a professional chef.
+            Cook • Share • Explore delicious recipes from around the world.
         </p>
 
         <div class="hero-buttons">
 
-            <a href="#search" class="hero-btn">
-    Explore Recipes
-</a>
+            <a href="#recipes" class="hero-btn">
+                Explore Recipes
+            </a>
 
             {% if user.is_authenticated %}
             <a href="{% url 'add_recipe' %}" class="hero-btn-outline">
@@ -39,47 +38,27 @@
 
     <div class="hero-right">
 
-        <div class="swiper heroSwiper">
+        {% for recipe in recipes|slice:":5" %}
 
-            <div class="swiper-wrapper">
+        <div class="hero-card">
 
-                {% for recipe in recipes|slice:":8" %}
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
 
-                <div class="swiper-slide">
+            <div class="hero-card-overlay">
 
-                    <div class="hero-card">
+                <span>{{ recipe.category }}</span>
 
-                        {% if recipe.image %}
-                        <img src="{{ recipe.image.url }}">
-                        {% else %}
-                        <img src="{% static 'images/default_recipe.jpg' %}">
-                        {% endif %}
+                <h2>{{ recipe.title }}</h2>
 
-                        <div class="hero-card-content">
-
-                            {% if recipe.category %}
-                            <span>
-                                {{ recipe.category.name }}
-                            </span>
-                            {% endif %}
-
-                            <h2>{{ recipe.title }}</h2>
-
-                            <a href="{% url 'recipe_detail' recipe.id %}">
-                                View Recipe →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                {% endfor %}
+                <a href="{% url 'recipe_detail' recipe.id %}">
+                    View Recipe →
+                </a>
 
             </div>
 
         </div>
+
+        {% endfor %}
 
     </div>
 
