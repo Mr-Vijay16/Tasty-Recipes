@@ -789,3 +789,74 @@ body{
 .navbar{
     z-index:9999;
 }
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+body{
+    padding-top: 90px;
+}
+
+body.dark-mode .navbar{
+    background:#181818;
+}
+
+.menu-toggle{
+    display:none;
+}
+
+@media(max-width:768px){
+
+.menu-toggle{
+    display:block;
+    background:none;
+    border:none;
+    font-size:30px;
+    cursor:pointer;
+    color:inherit;
+}
+
+.nav-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.nav-menu{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:80px;
+    left:0;
+    width:100%;
+    background:#fff;
+    padding:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    z-index:999;
+}
+
+body.dark-mode .nav-menu{
+    background:#181818;
+}
+
+.nav-menu.show{
+    display:flex;
+}
+
+.nav-menu li{
+    width:100%;
+}
+
+.nav-menu li a{
+    width:100%;
+    padding:15px;
+    justify-content:flex-start;
+}
+
+}

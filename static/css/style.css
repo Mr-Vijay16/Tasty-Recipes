@@ -770,55 +770,69 @@ body.dark-mode .footer{
 
 }
 
-/* ===================================================
+/* ==========================
         PAGINATION
-=================================================== */
+========================== */
 
 .pagination{
-
     display:flex;
-
     justify-content:center;
-
-    gap:12px;
-
-    margin:60px 0;
-
+    align-items:center;
+    gap:10px;
+    margin:40px 0;
     flex-wrap:wrap;
-
 }
 
 .pagination a,
-
 .pagination span{
-
-    width:45px;
-
-    height:45px;
-
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
-
+    justify-content:center;
+    min-width:48px;
+    height:46px;
+    padding:0 16px;
     border-radius:12px;
-
-    background:var(--card-color);
-
-    color:var(--text-color);
-
     text-decoration:none;
-
-    box-shadow:var(--shadow);
-
+    font-weight:600;
+    background:#fff;
+    color:#222;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
 }
 
-.pagination .active-page{
-
-    background:var(--primary);
-
+.pagination a:hover{
+    background:#ff4d5a;
     color:#fff;
+}
+
+.current-page{
+    background:#ff4d5a !important;
+    color:#fff !important;
+}
+
+body.dark-mode .pagination a,
+body.dark-mode .pagination span{
+    background:#1f1f1f;
+    color:#fff;
+}
+
+body.dark-mode .current-page{
+    background:#ff4d5a !important;
+}
+
+@media(max-width:768px){
+
+.pagination{
+    gap:8px;
+}
+
+.pagination a,
+.pagination span{
+    min-width:42px;
+    height:42px;
+    padding:0 12px;
+    font-size:14px;
+}
 
 }
 
