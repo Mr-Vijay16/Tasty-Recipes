@@ -23,15 +23,21 @@
                        placeholder="Enter your password">
             </div>
 
-            <button type="submit" class="auth-btn">
-                Login
-            </button>
+            
         </form>
 
-        <div class="bottom-text">
-            Don't have an account?
-            <a href="{% url 'register' %}">Register</a>
-        </div>
+        <div class="auth-footer">
+
+    <button type="submit" class="submit-btn">
+        Login
+    </button>
+
+    <p>
+        Don't have an account?
+        <a href="{% url 'register' %}">Register</a>
+    </p>
+
+</div>
 
     </div>
 </div>

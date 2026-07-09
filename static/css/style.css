@@ -2392,3 +2392,57 @@ body.dark-mode .error-message{
     color:#ff7b7b;
 
 }
+/* Login & Register Button */
+
+/* Authentication Footer */
+
+.auth-footer{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-top:30px;
+    gap:18px;
+}
+
+.auth-footer .submit-btn{
+    width:220px;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#ff4d5a;
+    color:#fff;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.auth-footer .submit-btn:hover{
+    background:#ff3244;
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(255,77,90,.35);
+}
+
+.auth-footer p{
+    margin:0;
+    font-size:18px;
+    text-align:center;
+    color:#666;
+}
+
+.auth-footer p a{
+    color:#ff4d5a;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.auth-footer p a:hover{
+    text-decoration:underline;
+}
+
+/* Dark Mode */
+
+body.dark-mode .auth-footer p{
+    color:#ddd;
+}

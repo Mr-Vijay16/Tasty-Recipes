@@ -37,18 +37,18 @@
                 {{ form.password2.errors }}
             </div>
 
-            <button type="submit" class="auth-btn">
-                Register
-            </button>
+           <div class="auth-footer">
 
-        </form>
+    <button type="submit" class="submit-btn">
+        Register
+    </button>
 
-        <p class="bottom-text">
-            Already have an account?
-            <a href="{% url 'login' %}">
-                Login
-            </a>
-        </p>
+    <p>
+        Already have an account?
+        <a href="{% url 'login' %}">Login</a>
+    </p>
+
+</div>
 
     </div>
 
