@@ -3,31 +3,89 @@
 
 {% block content %}
 
-<div class="hero-section">
+<section class="hero-section">
 
-    <div class="hero-content">
-        <h1>🍽️ Discover Amazing Recipes</h1>
+    <div class="hero-left">
+
+        <span class="hero-tag">
+            🍽 Featured Recipes
+        </span>
+
+        <h1>
+            Discover Amazing
+            <span>Recipes</span>
+        </h1>
 
         <p>
-            Find thousands of delicious dishes from around the world.
+            Explore thousands of delicious recipes created by our community.
+            Save your favourites and cook like a professional chef.
         </p>
 
-        <div id="recipes" class="hero-buttons">
-            <a href="#recipes" class="hero-btn">
-                Explore Recipes
-            </a>
+        <div class="hero-buttons">
+
+            <a href="#search" class="hero-btn">
+    Explore Recipes
+</a>
 
             {% if user.is_authenticated %}
             <a href="{% url 'add_recipe' %}" class="hero-btn-outline">
                 Add Recipe
             </a>
             {% endif %}
+
         </div>
+
     </div>
 
-</div>
+    <div class="hero-right">
 
-<div class="search-wrapper">
+        <div class="swiper heroSwiper">
+
+            <div class="swiper-wrapper">
+
+                {% for recipe in recipes|slice:":8" %}
+
+                <div class="swiper-slide">
+
+                    <div class="hero-card">
+
+                        {% if recipe.image %}
+                        <img src="{{ recipe.image.url }}">
+                        {% else %}
+                        <img src="{% static 'images/default_recipe.jpg' %}">
+                        {% endif %}
+
+                        <div class="hero-card-content">
+
+                            {% if recipe.category %}
+                            <span>
+                                {{ recipe.category.name }}
+                            </span>
+                            {% endif %}
+
+                            <h2>{{ recipe.title }}</h2>
+
+                            <a href="{% url 'recipe_detail' recipe.id %}">
+                                View Recipe →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div id="search" class="search-wrapper">
 
     <div class="search-box">
 

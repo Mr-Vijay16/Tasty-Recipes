@@ -12,6 +12,10 @@
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
 <body>
 
@@ -110,42 +114,94 @@
     <p>© 2026 Tasty Recipes. All Rights Reserved.</p>
 </footer>
 
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
 
-const toggleBtn =
-document.getElementById('theme-toggle');
+// Theme Toggle
+const toggleBtn = document.getElementById("theme-toggle");
 
-if(localStorage.getItem('theme') === 'dark'){
-    document.body.classList.add('dark-mode');
-    toggleBtn.innerHTML =
-        '<i class="fa-solid fa-sun"></i>';
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+    toggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
 }
 
-toggleBtn.addEventListener('click', () => {
+toggleBtn.addEventListener("click",function(){
 
-    document.body.classList.toggle('dark-mode');
+    document.body.classList.toggle("dark-mode");
 
-    if(document.body.classList.contains('dark-mode')){
-        localStorage.setItem('theme', 'dark');
-        toggleBtn.innerHTML =
-            '<i class="fa-solid fa-sun"></i>';
+    if(document.body.classList.contains("dark-mode")){
+        localStorage.setItem("theme","dark");
+        toggleBtn.innerHTML='<i class="fa-solid fa-sun"></i>';
+    }else{
+        localStorage.setItem("theme","light");
+        toggleBtn.innerHTML='<i class="fa-solid fa-moon"></i>';
     }
-    else{
-        localStorage.setItem('theme', 'light');
-        toggleBtn.innerHTML =
-            '<i class="fa-solid fa-moon"></i>';
-    }
+
 });
 
-const menuBtn = document.getElementById("menu-toggle");
-const navMenu = document.getElementById("nav-menu");
+
+// Mobile Menu
+
+const menuBtn=document.getElementById("menu-toggle");
+const navMenu=document.getElementById("nav-menu");
 
 if(menuBtn && navMenu){
-    menuBtn.addEventListener("click", function(){
+
+    menuBtn.addEventListener("click",function(){
+
         navMenu.classList.toggle("show");
+
     });
+
 }
+
+// Hero Swiper
+if (document.querySelector(".heroSwiper")) 
+
+new Swiper(".heroSwiper",{
+
+    effect:"coverflow",
+
+    centeredSlides:true,
+
+    slidesPerView:"auto",
+
+    loop:true,
+
+    grabCursor:true,
+
+    speed:900,
+
+    autoplay:{
+        delay:2500,
+        disableOnInteraction:false,
+    },
+
+    coverflowEffect:{
+        rotate:0,
+        stretch:-50,
+        depth:180,
+        modifier:2,
+        scale:0.85,
+        slideShadows:false,
+    },
+
+    breakpoints:{
+
+        0:{
+            slidesPerView:1.2,
+        },
+
+        768:{
+            slidesPerView:"auto",
+        }
+
+    }
+
+});
 </script>
+
 </body>
 </html>
