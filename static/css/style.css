@@ -2446,3 +2446,15 @@ body.dark-mode .error-message{
 body.dark-mode .auth-footer p{
     color:#ddd;
 }
+*{
+    box-sizing:border-box;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+body{
+    overflow-x:hidden;
+}
