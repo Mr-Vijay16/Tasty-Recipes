@@ -21,55 +21,78 @@
 
             {% csrf_token %}
 
+            <!-- Recipe Title -->
             <div class="form-group">
-                <label>Recipe Title</label>
+                <label for="{{ form.title.id_for_label }}">
+                    Recipe Title
+                </label>
                 {{ form.title }}
             </div>
 
+            <!-- Category -->
             <div class="form-group">
-                <label>Category</label>
+                <label for="{{ form.category.id_for_label }}">
+                    Category
+                </label>
                 {{ form.category }}
             </div>
-            <div>
-                <label>New Category (Optional)</label>
-<input type="text"
-       name="new_category"
-       placeholder="Enter new category">
+
+            <!-- New Category -->
+            <div class="form-group">
+                <label for="new_category">
+                    New Category (Optional)
+                </label>
+
+                <input
+                    type="text"
+                    id="new_category"
+                    name="new_category"
+                    class="form-control"
+                    placeholder="Enter new category">
             </div>
 
+            <!-- Description -->
             <div class="form-group">
-                <label>Description</label>
+                <label for="{{ form.description.id_for_label }}">
+                    Description
+                </label>
                 {{ form.description }}
             </div>
 
+            <!-- Ingredients -->
             <div class="form-group">
-                <label>Ingredients</label>
+                <label for="{{ form.ingredients.id_for_label }}">
+                    Ingredients
+                </label>
                 {{ form.ingredients }}
             </div>
 
+            <!-- Instructions -->
             <div class="form-group">
-                <label>Instructions</label>
+                <label for="{{ form.instructions.id_for_label }}">
+                    Instructions
+                </label>
                 {{ form.instructions }}
             </div>
 
+            <!-- Image -->
             <div class="form-group">
-                <label>Recipe Image</label>
+                <label for="{{ form.image.id_for_label }}">
+                    Recipe Image
+                </label>
                 {{ form.image }}
             </div>
 
             <div class="form-buttons">
 
-                <a
-                    href="{% url 'dashboard' %}"
-                    class="cancel-btn"
-                >
+                <a href="{% url 'dashboard' %}"
+                   class="cancel-btn">
                     Cancel
                 </a>
 
                 <button
                     type="submit"
-                    class="submit-btn"
-                >
+                    class="submit-btn">
                     <i class="fas fa-plus"></i>
                     Save Recipe
                 </button>

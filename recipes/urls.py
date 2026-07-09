@@ -77,11 +77,6 @@ path(
     views.profile,
     name='profile'
 ),
-path(
-    'unfavorite/<int:id>/',
-    views.remove_favorite,
-    name='remove_recipe_favorite'
-),
 
 
 ]

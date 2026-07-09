@@ -1,0 +1,558 @@
+/* ==========================================
+        TABLETS (991px)
+========================================== */
+
+@media (max-width:991px){
+
+.container{
+    width:94%;
+}
+
+.hero-section{
+    min-height:430px;
+}
+
+.hero-content h1{
+    font-size:3rem;
+}
+
+.hero-content p{
+    font-size:1.05rem;
+}
+
+.recipe-detail{
+    grid-template-columns:1fr;
+}
+
+.recipe-image{
+    position:static;
+}
+
+.recipe-image img{
+    height:420px;
+}
+
+.search-box form{
+    grid-template-columns:1fr;
+}
+
+.stats-container{
+    grid-template-columns:1fr;
+}
+
+.profile-header{
+    flex-direction:column;
+    text-align:center;
+}
+
+.profile-stats{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.dashboard-header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+}
+
+/* ==========================================
+            MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+body{
+
+    padding-top:90px;
+
+}
+
+/* NAVBAR */
+
+.navbar{
+
+    padding:12px 0;
+
+}
+
+.nav-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.logo{
+
+    font-size:1.8rem;
+
+}
+
+.nav-menu{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:10px;
+
+}
+
+.nav-menu a{
+
+    justify-content:center;
+
+    padding:10px;
+
+    font-size:14px;
+
+}
+
+#theme-toggle{
+
+    width:45px;
+
+    height:45px;
+
+}
+
+/* HERO */
+
+.hero-section{
+
+    min-height:350px;
+
+    border-radius:20px;
+
+}
+
+.hero-content{
+
+    width:90%;
+
+}
+
+.hero-content h1{
+
+    font-size:2.2rem;
+
+}
+
+.hero-content p{
+
+    font-size:1rem;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.hero-btn,
+
+.hero-btn-outline{
+
+    width:220px;
+
+}
+
+/* SEARCH */
+
+.search-box{
+
+    padding:20px;
+
+}
+
+.search-box form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.search-box input,
+
+.search-box select,
+
+.search-box button{
+
+    width:100%;
+
+}
+
+/* RECIPES */
+
+.recipe-container{
+
+    grid-template-columns:1fr;
+
+}
+
+.recipe-card img{
+
+    height:220px;
+
+}
+
+.recipe-content{
+
+    padding:20px;
+
+}
+
+.recipe-header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+    align-items:flex-start;
+
+}
+
+.card-buttons{
+
+    flex-direction:column;
+
+}
+
+.card-buttons a{
+
+    width:100%;
+
+}
+
+}
+
+/* ==========================================
+        DASHBOARD
+========================================== */
+
+@media (max-width:768px){
+
+.dashboard{
+    margin-top:20px;
+}
+
+.dashboard-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.dashboard-header h1{
+    font-size:2rem;
+}
+
+.dashboard-header p{
+    font-size:15px;
+}
+
+.add-btn{
+    width:100%;
+    justify-content:center;
+}
+
+.dashboard-recipes{
+    grid-template-columns:1fr;
+    gap:25px;
+}
+
+.dashboard-card img{
+    height:220px;
+}
+
+.dashboard-content{
+    padding:20px;
+}
+
+.dashboard-buttons{
+    flex-direction:column;
+}
+
+.dashboard-buttons a{
+    width:100%;
+}
+
+.stats-container{
+    grid-template-columns:1fr;
+}
+
+.stat-card{
+    padding:25px;
+}
+
+.stat-card h2{
+    font-size:32px;
+}
+
+}
+
+/* ==========================================
+        PROFILE
+========================================== */
+
+@media (max-width:768px){
+
+.profile-page{
+    width:95%;
+    padding:25px;
+}
+
+.profile-header{
+    flex-direction:column;
+    text-align:center;
+    gap:25px;
+}
+
+.profile-avatar{
+    width:100px;
+    height:100px;
+    font-size:42px;
+}
+
+.profile-info h1{
+    font-size:32px;
+}
+
+.profile-stats{
+    grid-template-columns:1fr;
+}
+
+.profile-actions{
+    flex-direction:column;
+}
+
+.profile-actions a{
+    width:100%;
+}
+
+}
+
+/* ==========================================
+        FAVORITES
+========================================== */
+
+@media (max-width:768px){
+
+.favorite-container{
+    grid-template-columns:1fr;
+}
+
+.favorite-card img{
+    height:220px;
+}
+
+.favorite-buttons{
+    flex-direction:column;
+}
+
+.favorite-buttons a{
+    width:100%;
+}
+
+}
+
+/* ==========================================
+        RECIPE DETAIL
+========================================== */
+
+@media (max-width:768px){
+
+.recipe-detail{
+    grid-template-columns:1fr;
+}
+
+.recipe-image{
+    position:static;
+}
+
+.recipe-image img{
+    height:300px;
+}
+
+.recipe-info{
+    padding:22px;
+}
+
+.recipe-info h1{
+    font-size:32px;
+}
+
+.detail-card{
+    padding:20px;
+}
+
+.rating-card{
+    padding:20px;
+}
+
+.comments-card{
+    padding:20px;
+}
+
+.comment-form textarea{
+    min-height:120px;
+}
+
+}
+
+/* ==========================================
+        LOGIN / REGISTER
+========================================== */
+
+@media (max-width:768px){
+
+.auth-container{
+    padding:40px 20px;
+    min-height:auto;
+}
+
+.auth-card{
+    width:100%;
+    padding:30px 22px;
+}
+
+.auth-card h1{
+    font-size:2rem;
+}
+
+.form-container{
+    width:95%;
+    padding:25px;
+}
+
+.form-title{
+    font-size:2rem;
+}
+
+.form-buttons{
+    flex-direction:column;
+}
+
+.form-buttons .btn,
+.form-buttons .btn-outline{
+    width:100%;
+}
+
+}
+
+/* ==========================================
+        PAGINATION
+========================================== */
+
+@media (max-width:768px){
+
+.pagination{
+    gap:8px;
+}
+
+.pagination a,
+.pagination span{
+    width:40px;
+    height:40px;
+    font-size:14px;
+}
+
+}
+
+/* ==========================================
+        FOOTER
+========================================== */
+
+@media (max-width:768px){
+
+.footer{
+    padding:20px;
+    font-size:14px;
+}
+
+}
+
+/* ==========================================
+        SMALL DEVICES
+========================================== */
+
+@media (max-width:480px){
+
+.logo{
+    font-size:1.5rem;
+}
+
+.hero-content h1{
+    font-size:1.8rem;
+}
+
+.hero-content p{
+    font-size:.95rem;
+}
+
+.nav-menu{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.recipe-content h2{
+    font-size:22px;
+}
+
+.dashboard-content h2{
+    font-size:22px;
+}
+
+.profile-info h1{
+    font-size:28px;
+}
+
+.stat-box h2{
+    font-size:30px;
+}
+
+.search-box{
+    padding:18px;
+}
+
+}
+/* ==========================================
+        MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+.form-page{
+
+    padding:35px 15px;
+}
+
+.form-container{
+
+    padding:25px;
+}
+
+.form-header h1{
+
+    font-size:2rem;
+}
+
+.form-buttons{
+
+    flex-direction:column;
+}
+
+.current-image img{
+
+    width:100%;
+}
+
+}

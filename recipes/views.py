@@ -197,10 +197,13 @@ def edit_recipe(request, id):
             return redirect('dashboard')
 
     return render(
-        request,
-        'edit_recipe.html',
-        {'form': form}
-    )
+    request,
+    'edit_recipe.html',
+    {
+        'form': form,
+        'recipe': recipe,
+    }
+)
 
 
 @login_required
@@ -449,18 +452,16 @@ def favorite_list(request):
     )
 @login_required
 def remove_favorite(request, id):
-    favorite = get_object_or_404(
-        Favorite,
+
+    Favorite.objects.filter(
         user=request.user,
         recipe_id=id
-    )
-
-    favorite.delete()
+    ).delete()
 
     return redirect(
         request.META.get(
             'HTTP_REFERER',
-            'home'
+            'favorites'
         )
     )
 

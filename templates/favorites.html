@@ -1,102 +1,64 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="favorites-page">
+  <div class="page-header">
+    <h1>❤️ My Favorites</h1>
+    <p>All your favorite recipes in one place.</p>
+  </div>
 
-    <div class="page-header">
-        <h1>❤️ My Favorites</h1>
-        <p>
-            All your favorite recipes in one place.
-        </p>
+  <div class="recipe-container">
+    {% for favorite in favorites %}
+
+    <div class="recipe-card">
+      {% if favorite.recipe.image %}
+      <img
+        src="{{ favorite.recipe.image.url }}"
+        alt="{{ favorite.recipe.title }}"
+      />
+      {% else %}
+      <img src="{% static 'images/default_recipe.jpg' %}" alt="No Image" />
+      {% endif %}
+
+      <div class="recipe-content">
+        {% if favorite.recipe.category %}
+        <span class="category-badge">
+          {{ favorite.recipe.category.name }}
+        </span>
+        {% endif %}
+
+        <h2>{{ favorite.recipe.title }}</h2>
+
+        <p>{{ favorite.recipe.description|truncatewords:15 }}</p>
+
+        <div class="card-buttons">
+          <a href="{% url 'recipe_detail' favorite.recipe.id %}" class="btn">
+            View
+          </a>
+
+          <a
+            href="{% url 'remove_favorite' favorite.recipe.id %}"
+            class="delete-btn"
+          >
+            Remove
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="recipe-container">
+    {% empty %}
 
-        {% for favorite in favorites %}
+    <div class="empty-state">
+      <div class="empty-icon">❤️</div>
 
-        <div class="recipe-card">
+      <h2>No favorite recipes yet</h2>
 
-            {% if favorite.recipe.image %}
-            <img
-                src="{{ favorite.recipe.image.url }}"
-                alt="{{ favorite.recipe.title }}"
-            >
-            {% else %}
-            <img
-                src="{% static 'images/default_recipe.jpg' %}"
-                alt="No Image"
-            >
-            {% endif %}
+      <p>Start exploring and add recipes to your favorites.</p>
 
-            <div class="recipe-content">
-
-                {% if favorite.recipe.category %}
-                <span class="category-badge">
-                    {{ favorite.recipe.category.name }}
-                </span>
-                {% endif %}
-
-                <h2>
-                    {{ favorite.recipe.title }}
-                </h2>
-
-                <p>
-                    {{ favorite.recipe.description|truncatewords:15 }}
-                </p>
-
-                <div class="card-buttons">
-
-                    <a
-                        href="{% url 'recipe_detail' favorite.recipe.id %}"
-                        class="btn"
-                    >
-                         View
-                    </a>
-
-                    <a
-                        href="{% url 'remove_favorite' favorite.id %}"
-                        class="delete-btn"
-                    >
-                             Remove
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        {% empty %}
-
-        <div class="empty-state">
-
-            <div class="empty-icon">
-                ❤️
-            </div>
-
-            <h2>
-                No favorite recipes yet
-            </h2>
-
-            <p>
-                Start exploring and add recipes to your favorites.
-            </p>
-
-            <a
-                href="{% url 'home' %}"
-                class="btn"
-            >
-                Explore Recipes
-            </a>
-
-        </div>
-
-        {% endfor %}
-
+      <a href="{% url 'home' %}" class="btn"> Explore Recipes </a>
     </div>
 
+    {% endfor %}
+  </div>
 </div>
 
 {% endblock %}
