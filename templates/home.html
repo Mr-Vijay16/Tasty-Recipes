@@ -40,23 +40,21 @@
 
         {% for recipe in recipes|slice:":5" %}
 
-        <div class="hero-card">
+       <a href="{% url 'recipe_detail' recipe.id %}" class="hero-card">
 
-            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
 
-            <div class="hero-card-overlay">
+    <div class="hero-card-overlay">
 
-                <span>{{ recipe.category }}</span>
+        <span>{{ recipe.category.name }}</span>
 
-                <h2>{{ recipe.title }}</h2>
+        <h2>{{ recipe.title }}</h2>
 
-                <a href="{% url 'recipe_detail' recipe.id %}">
-                    View Recipe →
-                </a>
+        <p>View Recipe →</p>
 
-            </div>
+    </div>
 
-        </div>
+</a>
 
         {% endfor %}
 

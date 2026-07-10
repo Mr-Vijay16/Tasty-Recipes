@@ -2966,3 +2966,20 @@ html{
     z-index:1;
     transform:translateX(180px);
 }
+
+.hero-card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
+}
+
+.hero-card:hover{
+    text-decoration:none;
+}
+
+.hero-card-overlay p{
+    color:#ff4d5a;
+    font-weight:600;
+    margin-top:12px;
+}
