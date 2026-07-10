@@ -983,3 +983,65 @@ body.dark-mode .nav-menu{
 }
 
 }
+
+@media (max-width:768px){
+
+.hero-right{
+    width:100%;
+    height:340px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.hero-card{
+    position:absolute;
+    width:240px;
+    height:320px;
+    border-radius:25px;
+    transition:.4s;
+}
+
+.hero-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-card:nth-child(1){
+    transform:translateX(0);
+    z-index:5;
+}
+
+.hero-card:nth-child(2){
+    transform:translateX(130px) scale(.92);
+    opacity:.6;
+    z-index:4;
+}
+
+.hero-card:nth-child(3),
+.hero-card:nth-child(4),
+.hero-card:nth-child(5){
+    display:none;
+}
+
+.hero-card-overlay{
+    padding:20px;
+}
+
+.hero-card-overlay span{
+    font-size:13px;
+    padding:6px 14px;
+}
+
+.hero-card-overlay h2{
+    font-size:2rem;
+}
+
+.hero-card-overlay a{
+    font-size:16px;
+}
+
+}
