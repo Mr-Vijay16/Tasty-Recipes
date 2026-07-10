@@ -869,20 +869,25 @@ body.dark-mode .nav-menu{
 @media (max-width:768px){
 
 .hero-section{
+    width:calc(100% - 30px);
+    margin:20px auto;
+
+    padding:30px 20px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
 
-    gap:40px;
+    gap:35px;
 
-    padding:40px 20px;
-
-    border-radius:25px;
-
+    border-radius:20px;
     overflow:hidden;
+
+    box-sizing:border-box;
 }
 
+}
 /* Left Side */
 
 .hero-left{
@@ -1096,4 +1101,3 @@ body.dark-mode .nav-menu{
 
 }
 
-}
