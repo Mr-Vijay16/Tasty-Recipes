@@ -866,48 +866,49 @@ body.dark-mode .nav-menu{
       HERO MOBILE
 ===================================== */
 
-/* ==========================================
-        HERO SECTION - MOBILE
-========================================== */
-
 @media (max-width:768px){
 
 .hero-section{
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
-    padding:30px 20px;
-    gap:30px;
+    gap:40px;
 
-    min-height:auto;
-    border-radius:20px;
+    padding:40px 20px;
 
-    text-align:center;
+    border-radius:25px;
+
+    overflow:hidden;
 }
 
-/* Left Content */
+/* Left Side */
 
 .hero-left{
     width:100%;
+    text-align:center;
     order:1;
 }
 
 .hero-tag{
-    font-size:14px;
-    padding:8px 16px;
+    display:inline-block;
+    padding:8px 18px;
+    font-size:13px;
+    border-radius:30px;
+    margin-bottom:20px;
 }
 
 .hero-left h1{
-    font-size:2.7rem;
-    line-height:1.2;
-    margin:20px 0;
+    font-size:3rem;
+    line-height:1.15;
+    margin-bottom:20px;
 }
 
 .hero-left p{
     font-size:18px;
     line-height:1.6;
+    color:#bfbfbf;
     margin-bottom:30px;
 }
 
@@ -916,132 +917,183 @@ body.dark-mode .nav-menu{
 .hero-buttons{
     display:flex;
     flex-direction:column;
-    gap:15px;
-    width:100%;
     align-items:center;
+    gap:15px;
 }
 
 .hero-btn,
 .hero-btn-outline{
-    width:100%;
-    max-width:300px;
-    text-align:center;
+
+    width:280px;
+    padding:16px;
+
+    border-radius:50px;
+
+    font-size:18px;
+    font-weight:700;
 }
 
-/* Right Side Cards */
+/* Right Side */
 
 .hero-right{
-    width:100%;
-    height:380px;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    order:2;
-}
 
-.hero-card{
-    width:260px;
+    width:100%;
     height:360px;
-}
 
-.hero-card:nth-child(1){
-    transform:translateX(0);
-    z-index:5;
-}
-
-.hero-card:nth-child(2){
-    transform:translateX(25px);
-    z-index:4;
-}
-
-.hero-card:nth-child(3){
-    transform:translateX(50px);
-    z-index:3;
-}
-
-.hero-card:nth-child(4){
-    transform:translateX(75px);
-    z-index:2;
-}
-
-.hero-card:nth-child(5){
-    transform:translateX(100px);
-    z-index:1;
-}
-
-.hero-card-overlay h2{
-    font-size:2rem;
-}
-
-.hero-card-overlay span{
-    font-size:14px;
-}
-
-.hero-card-overlay a{
-    font-size:16px;
-}
-
-}
-
-@media (max-width:768px){
-
-.hero-right{
-    width:100%;
-    height:340px;
     position:relative;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     overflow:hidden;
+
+    order:2;
+
 }
 
+/* Cards */
+
 .hero-card{
+
     position:absolute;
+
     width:240px;
     height:320px;
+
     border-radius:25px;
-    transition:.4s;
+
+    overflow:hidden;
+
+    transition:.5s ease;
+
+    text-decoration:none;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
 }
 
 .hero-card img{
+
     width:100%;
     height:100%;
     object-fit:cover;
+
 }
 
+.hero-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.75)
+    );
+
+}
+
+/* Card Positions */
+
 .hero-card:nth-child(1){
+
     transform:translateX(0);
-    z-index:5;
+
+    z-index:3;
+
 }
 
 .hero-card:nth-child(2){
-    transform:translateX(130px) scale(.92);
-    opacity:.6;
-    z-index:4;
+
+    transform:translateX(110px) scale(.92);
+
+    opacity:.55;
+
+    z-index:2;
+
 }
 
-.hero-card:nth-child(3),
+.hero-card:nth-child(3){
+
+    transform:translateX(210px) scale(.85);
+
+    opacity:.25;
+
+    z-index:1;
+
+}
+
 .hero-card:nth-child(4),
 .hero-card:nth-child(5){
+
     display:none;
+
 }
 
+/* Overlay */
+
 .hero-card-overlay{
-    padding:20px;
+
+    position:absolute;
+
+    left:20px;
+    right:20px;
+    bottom:20px;
+
+    z-index:10;
+
 }
 
 .hero-card-overlay span{
+
+    display:inline-block;
+
+    padding:7px 16px;
+
+    background:#ff4d5a;
+
+    color:#fff;
+
+    border-radius:25px;
+
     font-size:13px;
-    padding:6px 14px;
+    font-weight:600;
+
+    margin-bottom:12px;
+
 }
 
 .hero-card-overlay h2{
+
+    color:#fff;
+
     font-size:2rem;
+
+    line-height:1.2;
+
+    margin-bottom:10px;
+
 }
 
+.hero-card-overlay p{
+
+    color:#ff4d5a;
+
+    font-weight:700;
+
+    font-size:17px;
+
+}
+
+/* Hide View Recipe Link */
+
 .hero-card-overlay a{
-    font-size:16px;
+
+    display:none;
+
 }
 
 }
