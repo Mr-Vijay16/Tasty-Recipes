@@ -1100,4 +1100,70 @@ body.dark-mode .nav-menu{
     display:none;
 
 }
+@media (max-width:768px){
 
+.hero-right{
+    position:relative;
+    width:100%;
+    height:270px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.hero-card{
+    position:absolute;
+    width:190px;
+    height:250px;
+    border-radius:22px;
+    overflow:hidden;
+    transition:.4s ease;
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+
+.hero-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-card:nth-child(1){
+    transform:translateX(0);
+    z-index:3;
+}
+
+.hero-card:nth-child(2){
+    transform:translateX(130px) scale(.9);
+    opacity:.5;
+    z-index:2;
+}
+
+.hero-card:nth-child(3),
+.hero-card:nth-child(4),
+.hero-card:nth-child(5){
+    display:none;
+}
+
+.hero-card-overlay{
+    padding:16px;
+}
+
+.hero-card-overlay h2{
+    font-size:1.6rem;
+}
+
+.hero-card-overlay span{
+    font-size:12px;
+    padding:6px 14px;
+}
+
+}
+@media (max-width:768px){
+
+.hero-section{
+    padding:30px 18px;
+    gap:25px;
+}
+}
