@@ -1167,3 +1167,75 @@ body.dark-mode .nav-menu{
     gap:25px;
 }
 }
+
+@media (max-width:768px){
+
+.hero-section{
+
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:35px 20px;
+
+    min-height:auto;
+
+    gap:40px;
+}
+
+.hero-content{
+
+    width:100%;
+    text-align:center;
+}
+
+.hero-content h1{
+    font-size:3rem;
+}
+
+.hero-content p{
+    font-size:18px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+    align-items:center;
+}
+
+.hero-btn,
+.hero-btn-outline{
+    width:280px;
+    text-align:center;
+}
+
+.hero-slider{
+    width:260px;
+    height:360px;
+}
+
+.hero-card{
+    width:260px;
+    height:360px;
+}
+
+.hero-card:nth-child(1){
+    left:0;
+    top:0;
+}
+
+.hero-card:nth-child(2){
+    left:45px;
+    top:20px;
+}
+
+.hero-card:nth-child(3),
+.hero-card:nth-child(4),
+.hero-card:nth-child(5){
+    display:none;
+}
+
+.hero-card-content h2{
+    font-size:2rem;
+}
+
+}
