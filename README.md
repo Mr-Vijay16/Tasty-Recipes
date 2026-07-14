@@ -12,15 +12,19 @@ A modern Recipe Sharing Web Application built with **Django**, allowing users to
 
 ## 📸 Screenshots
 
-
+--Home
 <img width="1587" height="709" alt="image" src="https://github.com/user-attachments/assets/55711fc8-9241-4ca2-b0fd-2532f82bee08" />
 
+--Dashboard
 <img width="1599" height="705" alt="image" src="https://github.com/user-attachments/assets/916775c0-9c05-41b7-9783-face35664dc8" />
 
+--View Recipe
 <img width="1599" height="707" alt="image" src="https://github.com/user-attachments/assets/2e8d91c7-3086-4a40-947e-0160d482379b" />
 
+--Favourite
 <img width="1594" height="711" alt="image" src="https://github.com/user-attachments/assets/4c08dfa6-4c46-4544-a784-1d72f2f0c1cb" />
 
+--Profile
 <img width="1596" height="711" alt="image" src="https://github.com/user-attachments/assets/5a4ef670-1dfb-4a56-907e-b77a1c6f2db7" />
 
 
